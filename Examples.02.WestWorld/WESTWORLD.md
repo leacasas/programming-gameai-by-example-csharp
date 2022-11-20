@@ -38,7 +38,7 @@ All entities in this world inherit from this class. It only stores an ID and has
 
 ### _State_ class
 
-The state class. Each concrete state will inherit from this one, and it will implement a singleton pattern, meaning that the actors will have to share it. By using the Singleton pattern, they will not be able to persist agent-specific data within them, and thus, it has to be saved externally.
+The state class. Each concrete state will inherit from this one, and it will implement a singleton pattern, meaning that the actors will have to share it. By using the Singleton pattern, they will not be able to persist agent-specific data within them, and thus, it has to be saved externally. Uses generics to abstract some of the parameters to the methods.
 
 ### _Miner_ class
 
@@ -54,6 +54,24 @@ Miner states:
 
 ![miner uml diagram](mineruml.png "miner UML")
 
-### _EnterMineAndDigForNugget_ class
+### _EnterMineAndDigForNuggetState_ class
 
  In this state, if the miner is not located at the gold mine, change location to the gold mine. Once there, dig out gold nuggets until the pockets are full, when he should change state to _VisitBankAndDepositGold_, and if while digging he finds himself thirsty, stop and change state to _QuenchThirst_.
+ 
+### _VisitBankAndDepositGoldState_ class
+
+This is the state the miner should enter after mining enough nuggets. He will walk to the bank and deposit them. If he considers himself wealthy enough, change state to _GoHomeAndSleepUntilRested_. Otherwise, goes back to _EnterMineAndDigForNugget_.
+ 
+### _GoHomeAndSleepUntilRestedState_ class
+
+The miner starts with this state. It will return to this state once he's wealthy enough. The miner returns and sleeps until his fatigue level drops below a threshold. Then he changes state to _EnterMineAndDigForNugget_.
+ 
+### _QuenchThirstState_ class
+
+When the Miner's thirst level falls below a threshold, he'll enter this state. When the thirst is quenched, changes state back to _EnterMineAndDigForNugget_.
+
+### Global States and State Blips
+
+Global States are states that agents could enter at any given time, irrespective of conditions, or repeated in several parts of the same FSM. Like in The Sims, when a Sim needs to go to the bathroom, no matter what action it was doing at the time.
+
+State Blips are states that agents will enter but when exiting them, will always return to the previous state they were.

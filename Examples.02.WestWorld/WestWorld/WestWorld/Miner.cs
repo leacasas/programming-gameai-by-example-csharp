@@ -9,7 +9,7 @@ internal class Miner : BaseGameEntity
     const int THIRST_LEVEL = 5;
     const int TIREDNESS_LIMIT = 5;
 
-    State<Miner> _currentState;
+    private readonly StateMachine<Miner> _stateMachine;
 
     internal LocationType Location { get; set; }
 
@@ -20,31 +20,34 @@ internal class Miner : BaseGameEntity
 
     internal Miner(int id) : base(id)
     {
+        // Init
         Location = LocationType.Home;
         _goldCarried = 0;
         _moneyInBank = 0;
         _thirst = 0;
         _fatigue = 0;
-        _currentState = GoHomeAndSleepUntilRestedState.Instance;
+
+        // Setting FSM
+        _stateMachine = new StateMachine<Miner>(this);
+        _stateMachine.CurrentState = GoHomeAndSleepUntilRestedState.Instance;
+        _stateMachine.GlobalState = MinerGlobalState.Instance;
     }
 
     internal override void Update()
     {
-        _thirst++;
+        ++_thirst;
 
-        _currentState.Execute(this);
+        _stateMachine.Update();
     }
 
     internal void ChangeState(State<Miner> newState)
     {
-        // State machine logic
+        _stateMachine.ChangeState(newState);
+    }
 
-        // 1) Exit state
-        _currentState.Exit(this);
-        // 2) Reassign new state
-        _currentState = newState;
-        // 3) Enter new state
-        _currentState.Enter(this);
+    internal void RevertToPreviousState()
+    {
+        _stateMachine.RevertToPreviousState();
     }
 
     internal void ChangeLocation(LocationType location)

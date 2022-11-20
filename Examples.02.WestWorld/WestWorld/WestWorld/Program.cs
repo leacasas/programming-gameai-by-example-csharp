@@ -8,7 +8,7 @@ internal class Program
 
         Console.WriteLine("Hello, West World!");
 
-        for (var i = 0; i < 20; i++)
+        for (var i = 0; i < 50; i++)
         {
             miner.Update();
         }
