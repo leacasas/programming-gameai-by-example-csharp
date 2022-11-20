@@ -19,7 +19,8 @@ internal sealed class VisitBankAndDepositGoldState : State
     {
         if (miner.Location != LocationType.Bank)
         {
-            Console.WriteLine($"{miner.ID}: Goin' to the bank. Yes siree!");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"{miner.Name}: Goin' to the bank. Yes siree!");
 
             miner.ChangeLocation(LocationType.Bank);
         }
@@ -37,12 +38,14 @@ internal sealed class VisitBankAndDepositGoldState : State
 
         miner.SetGoldCarried(0);
 
-        Console.WriteLine($"{miner.ID}: Depositing gold. My total savings are {miner.Wealth()} gold nuggets.");
+        Console.ForegroundColor = ConsoleColor.DarkGreen;
+        Console.WriteLine($"{miner.Name}: Depositing gold. My total savings are {miner.Wealth()} gold nuggets.");
 
         //wealthy enough to rest?
         if (miner.IsComfy())
         {
-            Console.WriteLine($"{miner.ID} : Woohoo! Rich enough for now. Back home to mah lil' lady!");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"{miner.Name}: Woohoo! Rich enough for now. Back home to mah lil' lady!");
 
             miner.ChangeState(GoHomeAndSleepUntilRestedState.Instance);
         }
@@ -54,6 +57,7 @@ internal sealed class VisitBankAndDepositGoldState : State
 
     internal override void Exit(Miner miner)
     {
-        Console.WriteLine($"{miner.ID}: Leavin' the bank now");
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine($"{miner.Name}: Leavin' the bank now");
     }
 }

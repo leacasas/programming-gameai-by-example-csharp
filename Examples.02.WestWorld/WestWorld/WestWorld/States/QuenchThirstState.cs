@@ -17,7 +17,8 @@ internal sealed class QuenchThirstState : State
         {
             miner.ChangeLocation(LocationType.Saloon);
 
-            Console.WriteLine($"{miner.ID} : Boy! ah sure am thirsty! Goin' to that Saloon...");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine($"{miner.Name}: Boy! ah sure am thirsty! Goin' to that Saloon...");
         }
     }
 
@@ -27,7 +28,8 @@ internal sealed class QuenchThirstState : State
         {
             miner.BuyAndDrinkWhiskey();
 
-            Console.WriteLine($"{miner.ID} : Tis' a mighty fine sippin' liquer");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"{miner.Name}: Tis' a mighty fine sippin' liquer");
 
             miner.ChangeState(EnterMineAndDigForNuggetState.Instance);
         }
@@ -39,6 +41,7 @@ internal sealed class QuenchThirstState : State
 
     internal override void Exit(Miner miner)
     {
-        Console.WriteLine($"{miner.ID}: Leaving the Saloon now... feelin' recovered already!");
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine($"{miner.Name}: Leaving the Saloon now... feelin' recovered already!");
     }
 }

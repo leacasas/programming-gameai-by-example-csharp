@@ -15,7 +15,8 @@ internal sealed class GoHomeAndSleepUntilRestedState : State
     {
         if (miner.Location != LocationType.Home)
         {
-            Console.WriteLine($"{miner.ID}: Walkin' home...");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine($"{miner.Name}: Walkin' home...");
 
             miner.ChangeLocation(LocationType.Home);
         }
@@ -26,7 +27,8 @@ internal sealed class GoHomeAndSleepUntilRestedState : State
         //if miner is not fatigued start diggin'
         if (!miner.IsFatigued())
         {
-            Console.WriteLine($"{miner.ID} : What a god darn fantastic nap! Time to find more gold eh!");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"{miner.Name}: What a god darn fantastic nap! Time to find more gold eh!");
 
             miner.ChangeState(EnterMineAndDigForNuggetState.Instance);
         }
@@ -34,12 +36,14 @@ internal sealed class GoHomeAndSleepUntilRestedState : State
         {
             miner.DecreaseFatigue();
 
-            Console.WriteLine($"{miner.ID}: zzz... zzz... zzz...");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine($"{miner.Name}: zzz... zzz... zzz...");
         }
     }
 
     internal override void Exit(Miner miner)
     {
-        Console.WriteLine($"{miner.ID}: Leaving the house...");
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine($"{miner.Name}: Leaving the house...");
     }
 }

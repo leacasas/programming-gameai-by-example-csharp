@@ -21,7 +21,8 @@ internal sealed class EnterMineAndDigForNuggetState : State
     {
         if (miner.Location != LocationType.Goldmine)
         {
-            Console.WriteLine($"{miner.ID}: Walkin' to the gold mine!");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine($"{miner.Name}: Walkin' to the gold mine!");
 
             miner.ChangeLocation(LocationType.Goldmine);
         }
@@ -40,7 +41,8 @@ internal sealed class EnterMineAndDigForNuggetState : State
         // diggin' is hard work yo
         miner.IncreaseFatigue();
 
-        Console.WriteLine($"{miner.ID}: Pickin' up a nugget...");
+        Console.ForegroundColor = ConsoleColor.DarkYellow;
+        Console.WriteLine($"{miner.Name}: Pickin' up a nugget...");
 
         // If enough gold in pockets, go to the bank and deposit them.
         if (miner.HasPocketsFull())
@@ -62,6 +64,7 @@ internal sealed class EnterMineAndDigForNuggetState : State
     /// <param name="miner"></param>
     internal override void Exit(Miner miner)
     {
-        Console.WriteLine($"{miner.ID}: I'm leaving this mine with pockets full of gold nuggets!");
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine($"{miner.Name}: I'm leaving this mine with pockets full of gold nuggets!");
     }
 }
