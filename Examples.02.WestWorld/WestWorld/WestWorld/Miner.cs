@@ -9,7 +9,8 @@ internal class Miner : BaseGameEntity
     const int THIRST_LEVEL = 5;
     const int TIREDNESS_LIMIT = 5;
 
-    State _currentState;
+    State<Miner> _currentState;
+
     internal LocationType Location { get; set; }
 
     int _goldCarried;
@@ -34,7 +35,7 @@ internal class Miner : BaseGameEntity
         _currentState.Execute(this);
     }
 
-    internal void ChangeState(State newState)
+    internal void ChangeState(State<Miner> newState)
     {
         // State machine logic
 

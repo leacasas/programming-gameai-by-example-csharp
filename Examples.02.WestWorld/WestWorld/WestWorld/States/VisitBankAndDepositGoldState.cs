@@ -1,6 +1,6 @@
 ﻿namespace WestWorld.States;
 
-internal sealed class VisitBankAndDepositGoldState : State
+internal sealed class VisitBankAndDepositGoldState : State<Miner>
 {
     private static readonly Lazy<VisitBankAndDepositGoldState> _instance = new(() => new VisitBankAndDepositGoldState());
 

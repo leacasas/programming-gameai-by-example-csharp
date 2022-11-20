@@ -1,8 +1,8 @@
 ﻿namespace WestWorld.States;
 
-internal class State
+internal class State<T> where T : class
 {
-    internal virtual void Enter(Miner miner) { }
-    internal virtual void Execute(Miner miner) { }
-    internal virtual void Exit(Miner miner) { }
+    internal virtual void Enter(T entity) { }
+    internal virtual void Execute(T entity) { }
+    internal virtual void Exit(T entity) { }
 }

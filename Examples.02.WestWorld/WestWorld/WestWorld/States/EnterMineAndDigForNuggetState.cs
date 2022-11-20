@@ -1,6 +1,6 @@
 ﻿namespace WestWorld.States;
 
-internal sealed class EnterMineAndDigForNuggetState : State
+internal sealed class EnterMineAndDigForNuggetState : State<Miner>
 {
     private static readonly Lazy<EnterMineAndDigForNuggetState> _instance = new(() => new EnterMineAndDigForNuggetState());
 

@@ -1,6 +1,6 @@
 ﻿namespace WestWorld.States;
 
-internal sealed class GoHomeAndSleepUntilRestedState : State
+internal sealed class GoHomeAndSleepUntilRestedState : State<Miner>
 {
     private static readonly Lazy<GoHomeAndSleepUntilRestedState> _instance = new(() => new GoHomeAndSleepUntilRestedState());
 
@@ -11,6 +11,10 @@ internal sealed class GoHomeAndSleepUntilRestedState : State
         get { return _instance.Value; }
     }
 
+    /// <summary>
+    /// Enter the home.
+    /// </summary>
+    /// <param name="miner"></param>
     internal override void Enter(Miner miner)
     {
         if (miner.Location != LocationType.Home)
@@ -22,6 +26,11 @@ internal sealed class GoHomeAndSleepUntilRestedState : State
         }
     }
 
+    /// <summary>
+    /// If the miner is not fatigued (maybe just rested), go back to the gold mine.
+    /// If he is, rest until fatigue dissappears.
+    /// </summary>
+    /// <param name="miner"></param>
     internal override void Execute(Miner miner)
     {
         //if miner is not fatigued start diggin'
@@ -41,6 +50,10 @@ internal sealed class GoHomeAndSleepUntilRestedState : State
         }
     }
 
+    /// <summary>
+    /// Leave the house.
+    /// </summary>
+    /// <param name="miner"></param>
     internal override void Exit(Miner miner)
     {
         Console.ForegroundColor = ConsoleColor.White;

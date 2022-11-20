@@ -1,6 +1,6 @@
 ﻿namespace WestWorld.States;
 
-internal sealed class QuenchThirstState : State
+internal sealed class QuenchThirstState : State<Miner>
 {
     private static readonly Lazy<QuenchThirstState> _instance = new(() => new QuenchThirstState());
 
@@ -11,6 +11,10 @@ internal sealed class QuenchThirstState : State
         get { return _instance.Value; }
     }
 
+    /// <summary>
+    /// Miner enters the saloon to quench his thirst.
+    /// </summary>
+    /// <param name="miner"></param>
     internal override void Enter(Miner miner)
     {
         if (miner.Location != LocationType.Saloon)
@@ -22,6 +26,10 @@ internal sealed class QuenchThirstState : State
         }
     }
 
+    /// <summary>
+    /// If the miner is thirsty, buy a drink and then go back to dig.
+    /// </summary>
+    /// <param name="miner"></param>
     internal override void Execute(Miner miner)
     {
         if (miner.IsThirsty())
@@ -39,6 +47,10 @@ internal sealed class QuenchThirstState : State
         }
     }
 
+    /// <summary>
+    /// Leave the saloon
+    /// </summary>
+    /// <param name="miner"></param>
     internal override void Exit(Miner miner)
     {
         Console.ForegroundColor = ConsoleColor.White;
