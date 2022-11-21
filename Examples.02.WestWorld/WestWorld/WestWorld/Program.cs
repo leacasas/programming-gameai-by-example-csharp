@@ -4,13 +4,15 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        var miner = new Miner((int)WestWorldEntity.MinerBob);
+        var bobTheMiner = new Miner((int)WestWorldEntity.MinerBob);
+        var elsaTheWife = new MinersWife((int)WestWorldEntity.Elsa);
 
         Console.WriteLine("Hello, West World!");
 
         for (var i = 0; i < 50; i++)
         {
-            miner.Update();
+            bobTheMiner.Update();
+            elsaTheWife.Update();
         }
     }
 }

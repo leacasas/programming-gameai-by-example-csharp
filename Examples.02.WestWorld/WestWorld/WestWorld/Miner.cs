@@ -28,9 +28,11 @@ internal class Miner : BaseGameEntity
         _fatigue = 0;
 
         // Setting FSM
-        _stateMachine = new StateMachine<Miner>(this);
-        _stateMachine.CurrentState = GoHomeAndSleepUntilRestedState.Instance;
-        _stateMachine.GlobalState = MinerGlobalState.Instance;
+        _stateMachine = new StateMachine<Miner>(this)
+        {
+            CurrentState = GoHomeAndSleepUntilRestedState.Instance,
+            GlobalState = MinerGlobalState.Instance
+        };
     }
 
     internal override void Update()
