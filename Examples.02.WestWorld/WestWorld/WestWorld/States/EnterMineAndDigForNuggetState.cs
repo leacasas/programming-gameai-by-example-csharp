@@ -39,7 +39,7 @@ internal sealed class EnterMineAndDigForNuggetState : State<Miner>
         miner.AddToGoldCarried(1);
 
         // diggin' is hard work yo
-        miner.IncreaseFatigue();
+        miner.Fatigue++;
 
         Console.ForegroundColor = ConsoleColor.DarkYellow;
         Console.WriteLine($"{miner.Name}: Pickin' up a nugget...");

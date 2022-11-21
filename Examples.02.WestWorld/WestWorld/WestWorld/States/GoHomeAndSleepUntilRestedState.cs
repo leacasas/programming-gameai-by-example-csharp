@@ -56,7 +56,7 @@ internal sealed class GoHomeAndSleepUntilRestedState : State<Miner>
         }
         else // sleep
         {
-            miner.DecreaseFatigue();
+            miner.Fatigue--;
 
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine($"{miner.Name}: zzz... zzz... zzz...");

@@ -34,9 +34,9 @@ internal sealed class VisitBankAndDepositGoldState : State<Miner>
     internal override void Execute(Miner miner)
     {
         //deposit gold
-        miner.AddToWealth(miner.GoldCarried());
+        miner.AddToWealth(miner.GoldCarried);
 
-        miner.SetGoldCarried(0);
+        miner.GoldCarried = 0;
 
         Console.ForegroundColor = ConsoleColor.DarkGreen;
         Console.WriteLine($"{miner.Name}: Depositing gold. My total savings are {miner.Wealth()} gold nuggets.");
