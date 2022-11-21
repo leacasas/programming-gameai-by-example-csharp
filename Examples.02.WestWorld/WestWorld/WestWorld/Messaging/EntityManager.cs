@@ -3,7 +3,7 @@
 internal class EntityManager
 {
     private static readonly Lazy<EntityManager> _instance = new(() => new EntityManager());
-    private readonly Dictionary<int, BaseGameEntity> _entityMap = new();
+    private readonly Dictionary<int, AbstractGameEntity> _entityMap = new();
 
     private EntityManager()
     {
@@ -14,7 +14,7 @@ internal class EntityManager
         get { return _instance.Value; }
     }
 
-    internal void RegisterEntity(BaseGameEntity entity)
+    internal void RegisterEntity(AbstractGameEntity entity)
     {
         if (!_entityMap.ContainsKey(entity.ID))
         {
@@ -22,14 +22,14 @@ internal class EntityManager
         }
     }
 
-    internal BaseGameEntity GetEntityFromID(int id)
+    internal AbstractGameEntity GetEntityFromID(int id)
     {
-        _ = _entityMap.TryGetValue(id, out BaseGameEntity entity);
+        _ = _entityMap.TryGetValue(id, out AbstractGameEntity entity);
 
         return entity;
     }
 
-    internal void RemoveEntity(BaseGameEntity entity)
+    internal void RemoveEntity(AbstractGameEntity entity)
     {
         _entityMap.Remove(entity.ID);
     }

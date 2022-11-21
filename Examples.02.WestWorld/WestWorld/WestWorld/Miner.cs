@@ -1,18 +1,10 @@
-﻿using WestWorld.Messaging;
-using WestWorld.States;
+﻿using WestWorld.States;
 
 namespace WestWorld;
 
-internal class Miner : BaseGameEntity
+internal class Miner : BaseGameEntity<Miner>
 {
-    const int COMFORT_LEVEL = 5;
-    const int MAX_NUGGETS = 3;
-    const int THIRST_LEVEL = 5;
-    const int TIREDNESS_LIMIT = 5;
-
-    private readonly StateMachine<Miner> _stateMachine;
-
-    internal LocationType Location { get; set; }
+    internal bool IsWifeCooking { get; set; }
 
     int _goldCarried;
     int _moneyInBank;
@@ -23,6 +15,7 @@ internal class Miner : BaseGameEntity
     {
         // Init
         Location = LocationType.Home;
+        IsWifeCooking = false;
         _goldCarried = 0;
         _moneyInBank = 0;
         _thirst = 0;
@@ -40,27 +33,7 @@ internal class Miner : BaseGameEntity
     {
         ++_thirst;
 
-        _stateMachine.Update();
-    }
-
-    internal void ChangeState(State<Miner> newState)
-    {
-        _stateMachine.ChangeState(newState);
-    }
-
-    internal void RevertToPreviousState()
-    {
-        _stateMachine.RevertToPreviousState();
-    }
-
-    internal void ChangeLocation(LocationType location)
-    {
-        Location = location;
-    }
-
-    internal override bool HandleMessage(Telegram message)
-    {
-        return _stateMachine.HandleMessage(message);
+        base.Update();
     }
 
     internal void AddToGoldCarried(int goldToAdd)
@@ -78,7 +51,7 @@ internal class Miner : BaseGameEntity
 
     internal bool HasPocketsFull()
     {
-        return _goldCarried >= MAX_NUGGETS;
+        return _goldCarried >= Constants.MAX_NUGGETS;
     }
 
     internal void AddToWealth(int goldToAdd)
@@ -101,7 +74,7 @@ internal class Miner : BaseGameEntity
 
     internal bool IsComfy()
     {
-        return _moneyInBank >= COMFORT_LEVEL;
+        return _moneyInBank >= Constants.COMFORT_LEVEL;
     }
 
     internal void IncreaseFatigue()
@@ -114,12 +87,12 @@ internal class Miner : BaseGameEntity
     }
     internal bool IsFatigued()
     {
-        return _fatigue > TIREDNESS_LIMIT;
+        return _fatigue > Constants.TIREDNESS_LIMIT;
     }
 
     internal bool IsThirsty()
     {
-        return _thirst >= THIRST_LEVEL;
+        return _thirst >= Constants.THIRST_LEVEL;
     }
 
     internal void BuyAndDrinkWhiskey()

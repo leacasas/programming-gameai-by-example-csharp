@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace WestWorld.Messaging;
+﻿namespace WestWorld.Messaging;
 
 internal class MessageDispatcher
 {
@@ -23,7 +21,7 @@ internal class MessageDispatcher
     internal void DispatchMessage(WestWorldEntity sender, WestWorldEntity receiver, MessageType messageType, double delay, object? extraInfo = null)
     {
         // Get received from the EntityManager (the database of entities).
-        BaseGameEntity receiverEntity = EntityManager.Instance.GetEntityFromID((int)receiver);
+        AbstractGameEntity receiverEntity = EntityManager.Instance.GetEntityFromID((int)receiver);
 
         // Create the message
         Telegram newMessage = new Telegram(sender, receiver, messageType, delay, extraInfo);
@@ -67,7 +65,7 @@ internal class MessageDispatcher
             var nextMessage = _messageQueue.Dequeue();
 
             // find the recipient
-            BaseGameEntity recipient = EntityManager.Instance.GetEntityFromID((int)nextMessage.Receiver);
+            AbstractGameEntity recipient = EntityManager.Instance.GetEntityFromID((int)nextMessage.Receiver);
 
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine($"___ Queued message ready for dispatch. Sent to {nextMessage.Receiver}. Message is {nextMessage.MessageType}");
@@ -84,7 +82,7 @@ internal class MessageDispatcher
     /// </summary>
     /// <param name="receiver">The receiver that will handle the message</param>
     /// <param name="message">The message being sent</param>
-    private void Discharge(BaseGameEntity receiver, Telegram message)
+    private void Discharge(AbstractGameEntity receiver, Telegram message)
     {
         if (!receiver.HandleMessage(message))
         {

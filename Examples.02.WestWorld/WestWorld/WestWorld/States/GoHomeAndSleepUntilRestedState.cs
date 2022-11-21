@@ -22,7 +22,7 @@ internal sealed class GoHomeAndSleepUntilRestedState : State<Miner>
         if (miner.Location != LocationType.Home)
         {
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine($"{miner.Name}: Walkin' home...");
+            Console.WriteLine($"{miner.Name}: Walkin' home to take a lil' nap...");
 
             miner.ChangeLocation(LocationType.Home);
 
@@ -41,10 +41,18 @@ internal sealed class GoHomeAndSleepUntilRestedState : State<Miner>
         //if miner is not fatigued start diggin'
         if (!miner.IsFatigued())
         {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"{miner.Name}: What a god darn fantastic nap! Time to find more gold eh!");
+            if (miner.IsWifeCooking)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine($"{miner.Name}: What a god darn fantastic nap! I'm hungry for that stew hun'");
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"{miner.Name}: What a god darn fantastic nap! Time to find more gold eh!");
 
-            miner.ChangeState(EnterMineAndDigForNuggetState.Instance);
+                miner.ChangeState(EnterMineAndDigForNuggetState.Instance);
+            }
         }
         else // sleep
         {
@@ -77,6 +85,7 @@ internal sealed class GoHomeAndSleepUntilRestedState : State<Miner>
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine($"{miner.Name}: Okay hun, ahm a-comin'!");
 
+                    miner.IsWifeCooking = true;
                     miner.ChangeState(EatStewState.Instance);
 
                     return true;

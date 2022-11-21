@@ -1,33 +1,46 @@
 ﻿using WestWorld.Messaging;
+using WestWorld.States;
 
 namespace WestWorld;
 
-internal class BaseGameEntity
+internal class BaseGameEntity<T> : AbstractGameEntity where T : class
 {
-    internal int ID { get; set; }
+    protected StateMachine<T> _stateMachine;
 
-    internal string Name
-    {
-        get
-        {
-            switch (ID)
-            {
-                case (int)WestWorldEntity.MinerBob:
-                    return "Miner Bob";
-                case (int)WestWorldEntity.Elsa:
-                    return "Wife Elsa";
-                default:
-                    return "UNKNOWN";
-            }
-        }
-    }
+    internal LocationType Location { get; set; }
 
     internal BaseGameEntity(int id)
     {
         ID = id;
     }
 
-    internal virtual void Update() { }
+    internal override void Update()
+    {
+        _stateMachine.Update();
+    }
 
-    internal virtual bool HandleMessage(Telegram message) { return false; }
+    internal override void ChangeLocation(LocationType location)
+    {
+        Location = location;
+    }
+
+    internal void ChangeState(State<T> newState)
+    {
+        _stateMachine.ChangeState(newState);
+    }
+
+    internal override void RevertToPreviousState()
+    {
+        _stateMachine.RevertToPreviousState();
+    }
+
+    internal bool IsInState(State<T> state)
+    {
+        return _stateMachine.IsInState(state);
+    }
+
+    internal override bool HandleMessage(Telegram message)
+    {
+        return _stateMachine.HandleMessage(message);
+    }
 }

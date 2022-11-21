@@ -12,7 +12,7 @@ internal class Program
         var elsaTheWife = new MinersWife((int)WestWorldEntity.Elsa);
         EntityManager.Instance.RegisterEntity(elsaTheWife);
 
-        Console.WriteLine("Hello, West World!");
+        Console.WriteLine("Welcome to West World!");
 
         for (var i = 0; i < 50; i++)
         {

@@ -34,6 +34,8 @@ internal class EatStewState : State<Miner>
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine($"{miner.Name} : \"Thankya li'lle lady. Ah better get back to whatever ah wuz doin'");
         Console.ForegroundColor = ConsoleColor.White;
+
+        miner.IsWifeCooking = false;
     }
 
     internal override bool OnMessage(Miner miner, Telegram message)
