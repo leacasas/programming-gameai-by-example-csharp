@@ -1,4 +1,6 @@
-﻿namespace WestWorld.States;
+﻿using WestWorld.Messaging;
+
+namespace WestWorld.States;
 
 internal sealed class VisitBathroomState : State<MinersWife>
 {
@@ -35,5 +37,10 @@ internal sealed class VisitBathroomState : State<MinersWife>
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine($"{wife.Name}: Leavin' the Jon...");
         Console.BackgroundColor = ConsoleColor.Black;
+    }
+
+    internal override bool OnMessage(MinersWife wife, Telegram message)
+    {
+        return false;
     }
 }

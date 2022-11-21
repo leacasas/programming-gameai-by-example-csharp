@@ -1,4 +1,5 @@
-﻿using WestWorld.States;
+﻿using WestWorld.Messaging;
+using WestWorld.States;
 
 namespace WestWorld;
 
@@ -55,6 +56,11 @@ internal class Miner : BaseGameEntity
     internal void ChangeLocation(LocationType location)
     {
         Location = location;
+    }
+
+    internal override bool HandleMessage(Telegram message)
+    {
+        return _stateMachine.HandleMessage(message);
     }
 
     internal void AddToGoldCarried(int goldToAdd)

@@ -1,4 +1,6 @@
-﻿namespace WestWorld.States;
+﻿using WestWorld.Messaging;
+
+namespace WestWorld.States;
 
 internal sealed class DoHouseWorkState : State<MinersWife>
 {
@@ -13,7 +15,10 @@ internal sealed class DoHouseWorkState : State<MinersWife>
 
     internal override void Enter(MinersWife wife)
     {
-
+        Console.BackgroundColor = ConsoleColor.DarkCyan;
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine($"{wife.Name}: Time to do some more housework!");
+        Console.BackgroundColor = ConsoleColor.Black;
     }
 
     internal override void Execute(MinersWife wife)
@@ -42,5 +47,10 @@ internal sealed class DoHouseWorkState : State<MinersWife>
     internal override void Exit(MinersWife wife)
     {
 
+    }
+
+    internal override bool OnMessage(MinersWife wife, Telegram message)
+    {
+        return false;
     }
 }

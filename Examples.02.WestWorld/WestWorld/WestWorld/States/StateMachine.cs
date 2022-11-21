@@ -1,4 +1,6 @@
-﻿namespace WestWorld.States;
+﻿using WestWorld.Messaging;
+
+namespace WestWorld.States;
 
 internal class StateMachine<T> where T : class
 {
@@ -38,5 +40,22 @@ internal class StateMachine<T> where T : class
     internal bool IsInState(State<T> state)
     {
         return CurrentState == state;
+    }
+
+    internal bool HandleMessage(Telegram message)
+    {
+        // First, see if current state is valid and can handle the message
+        if (CurrentState != null && CurrentState.OnMessage(_owner, message))
+        {
+            return true;
+        }
+
+        // If not, and if global state is available, send msg to global state
+        if (GlobalState != null && GlobalState.OnMessage(_owner, message))
+        {
+            return true;
+        }
+
+        return false;
     }
 }

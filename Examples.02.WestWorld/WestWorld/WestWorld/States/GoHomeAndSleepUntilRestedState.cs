@@ -1,4 +1,6 @@
-﻿namespace WestWorld.States;
+﻿using WestWorld.Messaging;
+
+namespace WestWorld.States;
 
 internal sealed class GoHomeAndSleepUntilRestedState : State<Miner>
 {
@@ -23,6 +25,9 @@ internal sealed class GoHomeAndSleepUntilRestedState : State<Miner>
             Console.WriteLine($"{miner.Name}: Walkin' home...");
 
             miner.ChangeLocation(LocationType.Home);
+
+            // Dispatch message to Elsa
+            MessageDispatcher.Instance.DispatchMessage((WestWorldEntity)miner.ID, WestWorldEntity.Elsa, MessageType.HiHoneyImHome, 0, null);
         }
     }
 
@@ -58,5 +63,26 @@ internal sealed class GoHomeAndSleepUntilRestedState : State<Miner>
     {
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine($"{miner.Name}: Leaving the house...");
+    }
+
+    internal override bool OnMessage(Miner miner, Telegram message)
+    {
+        switch (message.MessageType)
+        {
+            case MessageType.StewReady:
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.WriteLine($"___ Message received by {miner.Name} at {DateTime.Now.Ticks}");
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"{miner.Name}: Okay hun, ahm a-comin'!");
+
+                    miner.ChangeState(EatStewState.Instance);
+
+                    return true;
+                }
+        }
+
+        return false;
     }
 }

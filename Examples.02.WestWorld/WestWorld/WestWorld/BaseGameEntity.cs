@@ -1,4 +1,6 @@
-﻿namespace WestWorld;
+﻿using WestWorld.Messaging;
+
+namespace WestWorld;
 
 internal class BaseGameEntity
 {
@@ -26,4 +28,6 @@ internal class BaseGameEntity
     }
 
     internal virtual void Update() { }
+
+    internal virtual bool HandleMessage(Telegram message) { return false; }
 }
