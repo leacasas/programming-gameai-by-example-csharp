@@ -1,7 +1,7 @@
 ﻿using WestWorld.Messaging;
 using WestWorld.States;
 
-namespace WestWorld;
+namespace WestWorld.Entities;
 
 internal class BaseGameEntity<T> : AbstractGameEntity where T : class
 {

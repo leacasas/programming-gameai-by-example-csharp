@@ -1,4 +1,7 @@
-﻿namespace WestWorld.States;
+﻿using WestWorld.Entities;
+using WestWorld.Messaging;
+
+namespace WestWorld.States.MinerStates;
 
 internal sealed class QuenchThirstState : State<Miner>
 {
@@ -22,6 +25,7 @@ internal sealed class QuenchThirstState : State<Miner>
             miner.ChangeLocation(LocationType.Saloon);
 
             Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.BackgroundColor = ConsoleColor.Black;
             Console.WriteLine($"{miner.Name}: Boy! ah sure am thirsty! Goin' to that Saloon...");
         }
     }
@@ -34,16 +38,14 @@ internal sealed class QuenchThirstState : State<Miner>
     {
         if (miner.IsThirsty())
         {
+            MessageDispatcher.Instance.DispatchMessage((WestWorldEntity)miner.ID, WestWorldEntity.BartenderJoe, MessageType.PourMeAWhiskey, 0, null);
             miner.BuyAndDrinkWhiskey();
 
             Console.ForegroundColor = ConsoleColor.Green;
+            Console.BackgroundColor = ConsoleColor.Black;
             Console.WriteLine($"{miner.Name}: Tis' a mighty fine sippin' liquer");
 
             miner.ChangeState(EnterMineAndDigForNuggetState.Instance);
-        }
-        else
-        {
-            // no idea
         }
     }
 
@@ -54,6 +56,7 @@ internal sealed class QuenchThirstState : State<Miner>
     internal override void Exit(Miner miner)
     {
         Console.ForegroundColor = ConsoleColor.White;
+        Console.BackgroundColor = ConsoleColor.Black;
         Console.WriteLine($"{miner.Name}: Leaving the Saloon now... feelin' recovered already!");
     }
 }

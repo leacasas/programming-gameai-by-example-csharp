@@ -4,7 +4,7 @@ namespace WestWorld.States;
 
 internal class StateMachine<T> where T : class
 {
-    private T _owner;
+    private readonly T _owner;
     internal State<T> CurrentState { get; set; }
     internal State<T> PreviousState { get; set; }
     internal State<T> GlobalState { get; set; }

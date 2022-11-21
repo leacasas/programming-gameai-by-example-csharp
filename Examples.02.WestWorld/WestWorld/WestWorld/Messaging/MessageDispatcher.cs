@@ -1,4 +1,6 @@
-﻿namespace WestWorld.Messaging;
+﻿using WestWorld.Entities;
+
+namespace WestWorld.Messaging;
 
 internal class MessageDispatcher
 {

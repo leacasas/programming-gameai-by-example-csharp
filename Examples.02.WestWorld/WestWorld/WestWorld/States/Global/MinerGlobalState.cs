@@ -1,4 +1,6 @@
-﻿namespace WestWorld.States;
+﻿using WestWorld.Entities;
+
+namespace WestWorld.States.Global;
 
 internal sealed class MinerGlobalState : State<Miner>
 {

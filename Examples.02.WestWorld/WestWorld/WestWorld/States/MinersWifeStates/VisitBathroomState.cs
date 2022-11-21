@@ -1,6 +1,7 @@
-﻿using WestWorld.Messaging;
+﻿using WestWorld.Entities;
+using WestWorld.Messaging;
 
-namespace WestWorld.States;
+namespace WestWorld.States.MinersWifeStates;
 
 internal sealed class VisitBathroomState : State<MinersWife>
 {

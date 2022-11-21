@@ -1,6 +1,8 @@
 ﻿using WestWorld.States;
+using WestWorld.States.Global;
+using WestWorld.States.MinerStates;
 
-namespace WestWorld;
+namespace WestWorld.Entities;
 
 internal class Miner : BaseGameEntity<Miner>
 {

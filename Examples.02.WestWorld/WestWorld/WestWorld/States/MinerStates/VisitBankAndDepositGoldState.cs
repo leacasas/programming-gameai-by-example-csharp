@@ -1,4 +1,6 @@
-﻿namespace WestWorld.States;
+﻿using WestWorld.Entities;
+
+namespace WestWorld.States.MinerStates;
 
 internal sealed class VisitBankAndDepositGoldState : State<Miner>
 {

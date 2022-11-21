@@ -1,6 +1,9 @@
-﻿using WestWorld.Messaging;
+﻿using WestWorld.Entities;
+using WestWorld.Messaging;
+using WestWorld.States.BartenderStates;
+using WestWorld.States.MinersWifeStates;
 
-namespace WestWorld.States;
+namespace WestWorld.States.Global;
 
 internal sealed class MinersWifeGlobalState : State<MinersWife>
 {

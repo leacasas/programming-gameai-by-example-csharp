@@ -1,6 +1,6 @@
 ﻿using WestWorld.Messaging;
 
-namespace WestWorld;
+namespace WestWorld.Entities;
 
 internal abstract class AbstractGameEntity
 {
@@ -14,6 +14,7 @@ internal abstract class AbstractGameEntity
             {
                 (int)WestWorldEntity.MinerBob => "Miner Bob",
                 (int)WestWorldEntity.Elsa => "Wife Elsa",
+                (int)WestWorldEntity.BartenderJoe => "Bartender Joe",
                 _ => "UNKNOWN",
             };
         }

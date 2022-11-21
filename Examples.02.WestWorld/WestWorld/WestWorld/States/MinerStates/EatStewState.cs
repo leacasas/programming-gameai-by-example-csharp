@@ -1,6 +1,7 @@
-﻿using WestWorld.Messaging;
+﻿using WestWorld.Entities;
+using WestWorld.Messaging;
 
-namespace WestWorld.States;
+namespace WestWorld.States.MinerStates;
 
 internal class EatStewState : State<Miner>
 {

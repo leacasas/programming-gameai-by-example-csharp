@@ -1,4 +1,6 @@
-﻿namespace WestWorld.Messaging;
+﻿using WestWorld.Entities;
+
+namespace WestWorld.Messaging;
 
 internal struct Telegram
 {
@@ -6,7 +8,7 @@ internal struct Telegram
     internal readonly WestWorldEntity Receiver;
     internal readonly MessageType MessageType;
     internal double DispatchTime;
-    readonly object _data;
+    readonly object? _data;
 
     internal Telegram(WestWorldEntity sender, WestWorldEntity receiver, MessageType messageType, double dispatchTime, object? data = null)
     {

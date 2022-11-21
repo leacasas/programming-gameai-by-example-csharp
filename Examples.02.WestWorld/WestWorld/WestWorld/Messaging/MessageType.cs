@@ -3,5 +3,6 @@
 internal enum MessageType
 {
     HiHoneyImHome,
-    StewReady
+    StewReady,
+    PourMeAWhiskey
 }
